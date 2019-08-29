@@ -106,6 +106,7 @@ class Grafo{
 		void BronKerbosch(vector<int> R, vector<int> P, vector<int> X, vector<vector<int>>& graph){
 	  if (P.empty() && X.empty()){
 	    result_cliques.insert(result_cliques.begin(), R);
+	    cout << "Maximal Clique--> ";
 	    for(auto x: R)
 	    	cout << x << " ";
 	    cout << endl;
@@ -121,6 +122,18 @@ class Grafo{
 	  }
 	}
 
+		void calcularGrau(){
+		int count = 0;
+		for(int i = 1; i<=62 ; i++){
+			cout << "VERTICE:" << i << " ";
+			for(auto x : graph[i])
+				count++;
+			
+			cout << "tem o respectivo grau => " << count << endl;
+			count = 0;
+		}
+		}
+
 
 int main(int agrc, char * argv[]){
 
@@ -128,7 +141,10 @@ int main(int agrc, char * argv[]){
 	 grafo.create_graph();
 	 vector<int> R,P,X;
 	 initializeP(P);
-	 BronKerbosch(R,P,X, graph);
+	 //calcular grau
+	 //calcularGrau();
+	 //maximal cliques
+	 //BronKerbosch(R,P,X, graph);
 
 	//int cust = beautiful_code.dijkstra(0,5);
 
