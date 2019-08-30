@@ -137,24 +137,42 @@ class Grafo{
 
 		int DegreeCalculate(int vertex){
 		int count = 0;
-		cout << "VERTICE:" << vertex << " ";
+		//cout << "VERTICE:" << vertex << " ";
 			for(auto x : graph[vertex])
 				count++;
-			cout << "tem o respectivo grau => " << count << endl;
+			//cout << "tem o respectivo grau => " << count << endl;
+
+			return count;
 		}
 		int linksCalculate(int vertex){
 			int count = 0;
-			for(int x = 0 ; x< (graph[vertex].size())-1 ; x++){
+			for(int x = 0 ; x< (graph[vertex].size()) ; x++){
 				for(int y = x+1; y< graph[vertex].size(); y++)
 					{
-					std::vector<int>::iterator it= find(graph[vertex].begin(),graph[vertex].end(),graph[vertex][y]);
-					if (it != graph[vertex].end())
+					std::vector<int>::iterator it= find(graph[(graph[vertex][x])].begin(),graph[(graph[vertex][x])].end(),graph[vertex][y]);
+					if (it != (graph[(graph[vertex][x])].end()) )
    				 count++;
 
 					}
-					cout << count <<" encerrou" << endl;
-					count = 0;
 				}
+				return count;
+			}
+			void clusteringCoefficient(){
+				double sum = 0;
+				for(int i=1; i<=62; i++){
+				int degree = DegreeCalculate(i);
+				int links = linksCalculate(i);
+				double d = (degree)*(degree-1);
+				double cc = (2*links);
+				if(d!=0)
+				cc = cc/d;
+				else
+				cc=0;
+
+				sum += cc;
+				cout << "Clustering coefficient of vertex " << i << " is " << cc << endl;
+				}
+				printf("The general coefficient is %.10lf \n",(sum/62));
 			}
 		
 
@@ -165,11 +183,12 @@ int main(int agrc, char * argv[]){
 	 grafo.create_graph();
 	 vector<int> R,P,X;
 	 initializeP(P);
-	 linksCalculate(1);
+	 //linksCalculate(1);
+	 //clusteringCoefficient();
+	 //BronKerbosch(R,P,X, graph);
 	 //calcular grau
 	 //EveryDegreeCalculate();
 	 //maximal cliques
-	 BronKerbosch(R,P,X, graph);
 
 	//int cust = beautiful_code.dijkstra(0,5);
 
