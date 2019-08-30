@@ -38,7 +38,6 @@ class Grafo{
 				//num2 = vertice num1 = adjacencia
 				if(aux % 2 == 0){
 					num2 = std::stoi (w,&sz);
-					addEdge(num2, num1);
 					addEdge(num1, num2);
 				}
 				else{
@@ -122,17 +121,42 @@ class Grafo{
 	  }
 	}
 
-		void calcularGrau(){
+		void EveryDegreeCalculate(){
 		int count = 0;
 		for(int i = 1; i<=62 ; i++){
 			cout << "VERTICE:" << i << " ";
-			for(auto x : graph[i])
+			for(auto x : graph[i]){
+				cout << x  << " ";
 				count++;
+			}
 			
 			cout << "tem o respectivo grau => " << count << endl;
 			count = 0;
 		}
 		}
+
+		int DegreeCalculate(int vertex){
+		int count = 0;
+		cout << "VERTICE:" << vertex << " ";
+			for(auto x : graph[vertex])
+				count++;
+			cout << "tem o respectivo grau => " << count << endl;
+		}
+		int linksCalculate(int vertex){
+			int count = 0;
+			for(int x = 0 ; x< (graph[vertex].size())-1 ; x++){
+				for(int y = x+1; y< graph[vertex].size(); y++)
+					{
+					std::vector<int>::iterator it= find(graph[vertex].begin(),graph[vertex].end(),graph[vertex][y]);
+					if (it != graph[vertex].end())
+   				 count++;
+
+					}
+					cout << count <<" encerrou" << endl;
+					count = 0;
+				}
+			}
+		
 
 
 int main(int agrc, char * argv[]){
@@ -141,10 +165,11 @@ int main(int agrc, char * argv[]){
 	 grafo.create_graph();
 	 vector<int> R,P,X;
 	 initializeP(P);
+	 linksCalculate(1);
 	 //calcular grau
-	 //calcularGrau();
+	 //EveryDegreeCalculate();
 	 //maximal cliques
-	 //BronKerbosch(R,P,X, graph);
+	 BronKerbosch(R,P,X, graph);
 
 	//int cust = beautiful_code.dijkstra(0,5);
 
