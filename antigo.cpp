@@ -137,10 +137,19 @@ class Grafo{
 
 		int DegreeCalculate(int vertex){
 		int count = 0;
-		//cout << "VERTICE:" << vertex << " ";
+		cout << "VERTICE:" << vertex << " ";
 			for(auto x : graph[vertex])
 				count++;
-			//cout << "tem o respectivo grau => " << count << endl;
+			cout << "tem o respectivo grau => " << count << endl << endl;
+
+			return count;
+		}
+		int DegreeCalculate2(int vertex){
+		int count = 0;
+		cout << "VERTICE:" << vertex << " ";
+			for(auto x : graph[vertex])
+				count++;
+			cout << "tem o respectivo grau => " << count << endl << endl;
 
 			return count;
 		}
@@ -160,7 +169,7 @@ class Grafo{
 			void clusteringCoefficient(){
 				double sum = 0;
 				for(int i=1; i<=62; i++){
-				int degree = DegreeCalculate(i);
+				int degree = DegreeCalculate2(i);
 				int links = linksCalculate(i);
 				double d = (degree)*(degree-1);
 				double cc = (2*links);
@@ -170,12 +179,12 @@ class Grafo{
 				cc=0;
 
 				sum += cc;
-				cout << "Clustering coefficient of vertex " << i << " is " << cc << endl;
+				cout << "O Coeficiente de Aglomeração do vértice : " << i << " é " << cc << endl;
 				}
-				printf("The general coefficient is %.10lf \n",(sum/62));
+				cout << endl;
+				printf("O Coeficiente médio de Aglomeração do Grafo %.10lf \n",(sum/62));
 			}
 		
-
 
 int main(int agrc, char * argv[]){
 
@@ -183,6 +192,45 @@ int main(int agrc, char * argv[]){
 	 grafo.create_graph();
 	 vector<int> R,P,X;
 	 initializeP(P);
+
+	 int opcao;
+	 int vertex;
+
+	 while(1){
+	 	cout << endl << "Por favor escolha a operação pra ser realizada no grafo" << endl;
+	 	cout << "Digite o número de uma das opções" << endl;
+	 	cout << "1 - O grau de um vértice especifico" << endl;
+ 		cout << "2 - O grau de todos os vértices" << endl;
+	 	cout << "3 - Todos os cliques maximais" << endl;
+	 	cout << "4 - Coeficiente de Aglomeração dos vértices e geral" << endl;
+	 	cout << "5 - Encerrar o programa" << endl;
+	 	cin >> opcao ;
+		system("clear");
+	 	if(opcao == 1){
+	 		cout << "Por favor informe o vértice desejado"  << endl;
+	 		cin >> vertex ;
+	 		DegreeCalculate(vertex);
+
+	 	}
+	 	else if(opcao == 2){
+	 		EveryDegreeCalculate();
+	 	}
+	 	else if(opcao == 3){
+	 		BronKerbosch(R,P,X, graph);
+	 	}
+	 	else if(opcao == 4){
+	 		clusteringCoefficient();
+	 			
+	 	}
+	 	else if(opcao == 5){
+	 		return 0;
+	 		
+	 	}
+	 	else{
+	 		cout << "Por favor digite uma opção válida"<<endl;
+	 	}
+
+	 }
 	 //linksCalculate(1);
 	 //clusteringCoefficient();
 	 //BronKerbosch(R,P,X, graph);
